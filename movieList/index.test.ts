@@ -6,7 +6,7 @@ const driver = new Builder().withCapabilities(Capabilities.chrome()).build()
 
 
 beforeAll(async () => {
-    await driver.get('/Users/annegolladay/Desktop/devmtn/Week6/automation/movieList/index.html')
+    await driver.get('http://127.0.0.1:5500/movieList/index.html')
 })
 
 
@@ -15,12 +15,15 @@ afterAll(async () => {
 })
 
 test('add movie to list', async () => {
-    await driver.findElement(By.xpath('//*/input')).sendKeys('superman\n')
+    await driver.findElement(By.xpath('//input')).sendKeys('superman\n')
 
-    //await driver.findElement(By.xpath('//*/button')).click()
+    await driver.sleep(3000)
+    //await driver.findElement(By.xpath('//button')).click()
 
     //cross movie off
-    await (await driver.findElement(By.xpath(`//span[conatins(text(),="superman")]`))).click()
+    await (await driver.findElement(By.xpath(`//span[contains(text(),"superman")]`))).click()
+
+    await driver.sleep(3000)
 
     //delete movie
     await (await driver.findElement(By.id("superman"))).click() 
@@ -28,5 +31,10 @@ test('add movie to list', async () => {
     await driver.sleep(3000)
 })
 
+//Advanced message
 
+
+// test('reveal message', () => {
+//     expect(deleteMovie(revealMessage())).toBeTruthy()
+// })
 
